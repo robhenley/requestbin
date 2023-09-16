@@ -10,6 +10,9 @@ import (
 
 func main() {
 	var port string
+	var host string
+
+	flag.StringVar(&host, "host", "127.0.0.1", "The host to listen on.")
 	flag.StringVar(&port, "port", "8080", "The port to listen on.")
 	flag.Parse()
 
@@ -25,6 +28,6 @@ func main() {
 		)
 	})
 
-	fmt.Println("Listening for requests at 0.0.0.0:" + port)
-	http.ListenAndServe(":"+port, nil)
+	fmt.Printf("Listening for requests at %s:%s\n", host, port)
+	http.ListenAndServe(fmt.Sprintf("%s:%s", host, port), nil)
 }
